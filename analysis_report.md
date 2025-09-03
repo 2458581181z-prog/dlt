@@ -7,64 +7,64 @@ All lottery number combinations are theoretically equiprobable in a fair lottery
 This tool does NOT guarantee any improved probability of winning.
 Lottery games involve significant financial risk - play responsibly.
 
-**Analysis Date:** 2025-09-03T09:10:52.069058
+**Analysis Date:** 2025-09-03T09:14:47.982655
 **Dataset:** 500 historical draws
-**Recent Window:** 30 draws
+**Recent Window:** 10 draws
 **Detected Bias:** NEUTRAL
 
 ## Statistical Summary
 
 ### Front Numbers (1-35)
 **Top 10 Hot Numbers (Positive Z-scores):**
-- 14: z=+1.62 (baseline: 54, recent: 6)
-- 24: z=+1.48 (baseline: 57, recent: 6)
--  9: z=+1.32 (baseline: 74, recent: 7)
-- 18: z=+1.18 (baseline: 64, recent: 6)
--  1: z=+1.10 (baseline: 66, recent: 6)
-- 34: z=+1.02 (baseline: 68, recent: 6)
--  2: z=+0.99 (baseline: 83, recent: 7)
--  4: z=+0.77 (baseline: 75, recent: 6)
-- 33: z=+0.75 (baseline: 61, recent: 5)
-- 12: z=+0.73 (baseline: 76, recent: 6)
+- 17: z=+1.63 (baseline: 64, recent: 3)
+-  1: z=+1.57 (baseline: 66, recent: 3)
+- 32: z=+1.49 (baseline: 69, recent: 3)
+-  9: z=+1.35 (baseline: 74, recent: 3)
+-  7: z=+1.18 (baseline: 81, recent: 3)
+- 25: z=+1.18 (baseline: 81, recent: 3)
+- 24: z=+0.86 (baseline: 57, recent: 2)
+- 26: z=+0.59 (baseline: 68, recent: 2)
+- 34: z=+0.59 (baseline: 68, recent: 2)
+- 10: z=+0.53 (baseline: 71, recent: 2)
 
 **Top 10 Cold Numbers (Negative Z-scores):**
--  3: z=-1.77 (baseline: 74, recent: 1)
-- 21: z=-1.25 (baseline: 74, recent: 2)
-- 30: z=-1.23 (baseline: 73, recent: 2)
-- 28: z=-1.21 (baseline: 72, recent: 2)
-- 31: z=-1.08 (baseline: 67, recent: 2)
--  5: z=-0.95 (baseline: 82, recent: 3)
-- 23: z=-0.93 (baseline: 61, recent: 2)
-- 20: z=-0.90 (baseline: 80, recent: 3)
--  8: z=-0.82 (baseline: 77, recent: 3)
-- 27: z=-0.69 (baseline: 72, recent: 3)
+-  8: z=-1.35 (baseline: 77, recent: 0)
+- 15: z=-1.33 (baseline: 75, recent: 0)
+- 21: z=-1.32 (baseline: 74, recent: 0)
+-  3: z=-1.32 (baseline: 74, recent: 0)
+- 29: z=-1.28 (baseline: 70, recent: 0)
+- 18: z=-1.21 (baseline: 64, recent: 0)
+-  2: z=-0.56 (baseline: 83, recent: 1)
+-  6: z=-0.55 (baseline: 82, recent: 1)
+-  5: z=-0.55 (baseline: 82, recent: 1)
+- 20: z=-0.52 (baseline: 80, recent: 1)
 
 ### Back Numbers (1-12)
 **Hot Numbers (Positive Z-scores):**
--  5: z=+1.78 (baseline: 88, recent: 9)
--  4: z=+1.47 (baseline: 70, recent: 7)
--  3: z=+0.47 (baseline: 84, recent: 6)
--  9: z=+0.38 (baseline: 87, recent: 6)
-- 10: z=+0.38 (baseline: 87, recent: 6)
--  1: z=+0.32 (baseline: 89, recent: 6)
+-  2: z=+1.12 (baseline: 84, recent: 3)
+-  9: z=+1.05 (baseline: 87, recent: 3)
+- 10: z=+1.05 (baseline: 87, recent: 3)
+-  5: z=+1.03 (baseline: 88, recent: 3)
+-  7: z=+0.83 (baseline: 98, recent: 3)
 
 **Cold Numbers (Negative Z-scores):**
--  8: z=-1.33 (baseline: 77, recent: 2)
--  7: z=-1.32 (baseline: 98, recent: 3)
--  6: z=-1.04 (baseline: 86, recent: 3)
-- 12: z=-0.79 (baseline: 76, recent: 3)
-- 11: z=-0.23 (baseline: 74, recent: 4)
--  2: z=-0.02 (baseline: 84, recent: 5)
+-  8: z=-1.35 (baseline: 77, recent: 0)
+- 11: z=-1.32 (baseline: 74, recent: 0)
+-  1: z=-0.64 (baseline: 89, recent: 1)
+-  6: z=-0.60 (baseline: 86, recent: 1)
+-  3: z=-0.58 (baseline: 84, recent: 1)
+- 12: z=-0.46 (baseline: 76, recent: 1)
+-  4: z=-0.36 (baseline: 70, recent: 1)
 
 ## Generated Candidate Picks
 
 Based on neutral bias analysis:
 
-**Pick 1:** 06 07 08 09 27 + 05 06
-**Pick 2:** 30 31 33 34 35 + 02 05
-**Pick 3:** 05 08 09 19 27 + 01 11
-**Pick 4:** 02 05 09 15 19 + 03 08
-**Pick 5:** 06 13 17 18 32 + 02 04
+**Pick 1:** 10 14 27 30 32 + 02 12
+**Pick 2:** 08 11 14 33 35 + 04 06
+**Pick 3:** 02 06 07 12 32 + 03 06
+**Pick 4:** 02 03 13 14 29 + 03 08
+**Pick 5:** 02 07 31 34 35 + 06 12
 
 ## Methodology
 
