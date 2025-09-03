@@ -1,0 +1,131 @@
+name: Lottery Analysis
+
+on:
+  workflow_dispatch:
+    inputs:
+      recent_window:
+        description: 'Size of recent window for trend analysis'
+        required: false
+        default: '50'
+        type: string
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches: [ main, master ]
+
+jobs:
+  lottery-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+        
+    - name: Run lottery analysis
+      id: analysis
+      run: |
+        # Set recent window size (from input or default)
+        RECENT_WINDOW="${{ github.event.inputs.recent_window || '50' }}"
+        
+        echo "Running lottery analysis with recent window: $RECENT_WINDOW"
+        python3 lottery_analysis.py --recent "$RECENT_WINDOW"
+        
+        # Capture analysis results for summary
+        echo "## 🎲 Lottery Analysis Results" >> analysis_summary.txt
+        echo "" >> analysis_summary.txt
+        echo "**Analysis Date:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")" >> analysis_summary.txt
+        echo "**Recent Window:** $RECENT_WINDOW draws" >> analysis_summary.txt
+        echo "" >> analysis_summary.txt
+        
+        # Extract bias from the analysis output
+        BIAS=$(python3 -c "
+        import json
+        try:
+            with open('analysis_report.md', 'r') as f:
+                content = f.read()
+                for line in content.split('\n'):
+                    if 'Detected Bias:' in line:
+                        bias = line.split('**Detected Bias:** ')[1].strip()
+                        print(bias)
+                        break
+        except:
+            print('UNKNOWN')
+        ")
+        
+        echo "**Detected Bias:** $BIAS" >> analysis_summary.txt
+        echo "" >> analysis_summary.txt
+        echo "**Generated Picks:**" >> analysis_summary.txt
+        
+        # Extract picks from candidate_picks.txt
+        grep "Pick [0-9]:" candidate_picks.txt | sed 's/^/- /' >> analysis_summary.txt
+        
+        echo "" >> analysis_summary.txt
+        echo "⚠️ **ENTERTAINMENT PURPOSES ONLY** - This analysis does not guarantee any improved probability of winning." >> analysis_summary.txt
+        echo "All number combinations are theoretically equiprobable in a fair lottery." >> analysis_summary.txt
+        
+        # Set output for job summary
+        echo "bias=$BIAS" >> $GITHUB_OUTPUT
+        
+    - name: Display analysis summary
+      run: |
+        echo "## 🎲 Lottery Analysis Summary"
+        echo ""
+        cat analysis_summary.txt
+        echo ""
+        echo "Full analysis report and picks have been generated and will be committed to the repository."
+        
+    - name: Add job summary
+      run: |
+        cat analysis_summary.txt >> $GITHUB_STEP_SUMMARY
+        
+    - name: Check for changes
+      id: check_changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Check if there are any changes to commit
+        if git diff --quiet && git diff --staged --quiet; then
+          echo "No changes to commit"
+          echo "changes=false" >> $GITHUB_OUTPUT
+        else
+          echo "Changes detected"
+          echo "changes=true" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Commit and push changes
+      if: steps.check_changes.outputs.changes == 'true'
+      run: |
+        git config --local user.email "action@github.com" 
+        git config --local user.name "GitHub Action"
+        
+        # Add generated files
+        git add analysis_report.md candidate_picks.txt
+        
+        # Create commit message with analysis summary
+        RECENT_WINDOW="${{ github.event.inputs.recent_window || '50' }}"
+        BIAS="${{ steps.analysis.outputs.bias }}"
+        
+        git commit -m "🎲 Update lottery analysis results
+        
+        - Bias detected: $BIAS
+        - Recent window: $RECENT_WINDOW draws
+        - Analysis date: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+        
+        ⚠️ Entertainment purposes only - no guaranteed probability improvement."
+        
+        git push
+        
+    - name: Analysis complete
+      run: |
+        echo "✅ Lottery analysis completed successfully!"
+        echo "📊 Analysis report: analysis_report.md"
+        echo "🎯 Candidate picks: candidate_picks.txt"
+        echo "🎲 Detected bias: ${{ steps.analysis.outputs.bias }}"
+        echo ""
+        echo "⚠️ Remember: This is for entertainment purposes only!"
