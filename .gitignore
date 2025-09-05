@@ -42,6 +42,10 @@ Thumbs.db
 *.temp
 analysis_summary.txt
 
+# 输出目录 / Output directories
+output/
+results/
+
 # Keep generated analysis files
 !analysis_report.md
 !candidate_picks.txt

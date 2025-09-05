@@ -1,0 +1,97 @@
+# 超级大乐透统计分析配置文件
+# Configuration file for Super Lotto statistical analysis
+
+# 数据配置 / Data Configuration
+data:
+  # 历史数据文件路径 / Historical data file path
+  input_file: "新建文本文档 (6).txt"
+  
+  # CSV列映射 / CSV column mapping
+  columns:
+    # 开奖日期列名 / Draw date column name
+    date: "draw_date"
+    # 开奖期号列名 / Draw number column name  
+    draw_number: "draw_num"
+    # 前区号码列名 (逗号分隔或多列) / Front numbers column (comma-separated or multiple columns)
+    front_numbers: "front_numbers"
+    # 后区号码列名 (逗号分隔或多列) / Back numbers column (comma-separated or multiple columns)  
+    back_numbers: "back_numbers"
+
+# 分析配置 / Analysis Configuration
+analysis:
+  # 最近趋势窗口大小 / Recent trend window size
+  recent_window: 50
+  
+  # 使用的历史数据总量 / Total historical data to use
+  total_draws: 500
+  
+  # 号码范围 / Number ranges
+  front_range: [1, 35]  # 前区号码范围 / Front numbers range
+  back_range: [1, 12]   # 后区号码范围 / Back numbers range
+
+# 指标权重配置 / Metrics weight configuration
+metrics:
+  # 冷热号权重 / Hot/cold numbers weight
+  hot_cold_weight: 0.3
+  
+  # 遗漏值权重 / Missing values weight  
+  missing_weight: 0.2
+  
+  # 和值权重 / Sum value weight
+  sum_weight: 0.15
+  
+  # 奇偶比权重 / Odd/even ratio weight
+  odd_even_weight: 0.1
+  
+  # 区间分布权重 / Range distribution weight
+  range_distribution_weight: 0.1
+  
+  # 连号权重 / Consecutive numbers weight
+  consecutive_weight: 0.05
+  
+  # 同尾权重 / Same tail weight
+  same_tail_weight: 0.05
+  
+  # 关联度权重 / Correlation weight
+  correlation_weight: 0.05
+
+# 输出配置 / Output Configuration  
+output:
+  # 候选号码数量 / Number of candidate picks
+  num_candidates: 5
+  
+  # 输出目录 / Output directory
+  output_dir: "output"
+  
+  # 候选号码文件前缀 / Candidates file prefix
+  candidates_prefix: "candidates"
+  
+  # 分析报告文件前缀 / Report file prefix
+  report_prefix: "report"
+  
+  # 文件名时间戳格式 / Timestamp format for filenames
+  timestamp_format: "%Y%m%d_%H%M%S"
+
+# 约束配置 / Constraints Configuration
+constraints:
+  # 和值范围约束 / Sum range constraints
+  sum_range:
+    front_min: 50    # 前区和值最小值 / Front numbers sum minimum
+    front_max: 150   # 前区和值最大值 / Front numbers sum maximum
+    
+  # 奇偶比约束 / Odd/even ratio constraints  
+  odd_even_ratio:
+    front_min_odd: 1   # 前区最少奇数个数 / Front minimum odd numbers
+    front_max_odd: 4   # 前区最多奇数个数 / Front maximum odd numbers
+    back_min_odd: 0    # 后区最少奇数个数 / Back minimum odd numbers  
+    back_max_odd: 2    # 后区最多奇数个数 / Back maximum odd numbers
+    
+  # 区间分布约束 / Range distribution constraints
+  range_distribution:
+    # 前区号码区间分布 (每个区间最少/最多号码数) / Front numbers range distribution
+    front_ranges:
+      - {min: 1, max: 7, min_count: 0, max_count: 3}    # 1-7区间
+      - {min: 8, max: 14, min_count: 0, max_count: 3}   # 8-14区间  
+      - {min: 15, max: 21, min_count: 0, max_count: 3}  # 15-21区间
+      - {min: 22, max: 28, min_count: 0, max_count: 3}  # 22-28区间
+      - {min: 29, max: 35, min_count: 0, max_count: 3}  # 29-35区间

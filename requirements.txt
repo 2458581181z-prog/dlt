@@ -1,0 +1,9 @@
+# 超级大乐透统计分析框架依赖
+# Dependencies for Super Lotto Statistical Analysis Framework
+
+pandas>=1.5.0
+numpy>=1.21.0
+scipy>=1.9.0
+scikit-learn>=1.1.0
+PyYAML>=6.0
+python-dateutil>=2.8.0
