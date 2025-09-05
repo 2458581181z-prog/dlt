@@ -1,0 +1,64 @@
+name: lottery-analysis
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up job
+        run: echo "Starting DLT analysis..."
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run lottery analysis
+        run: python analyze_dlt.py --input "新建文本文档 (6).txt" --recent 50 --outdir out
+
+      - name: Display analysis summary
+        run: cat out/report.md || echo "No report generated"
+
+      - name: Add job summary
+        run: |
+          echo "## DLT Analysis Summary" >> $GITHUB_STEP_SUMMARY
+          head -30 out/report.md >> $GITHUB_STEP_SUMMARY || echo "No report generated" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git status --porcelain | grep "out/" && echo "::set-output name=outchanged::true" || echo "::set-output name=outchanged::false"
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.outchanged == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions[bot]"
+          git add out/
+          git commit -m "Update lottery analysis results"
+          # Extract branch name from GITHUB_REF
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          if [ -z "$BRANCH" ]; then
+            # Try to get branch name from .git/HEAD
+            BRANCH=$(git symbolic-ref --short HEAD || echo "")
+          fi
+          if [ -n "$BRANCH" ]; then
+            git push origin "$BRANCH"
+          else
+            echo "Could not determine branch name to push! Skipping push."
+            exit 0
+          fi
+
+      - name: Analysis complete
+        run: echo "DLT analysis workflow complete."
